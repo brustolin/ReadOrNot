@@ -10,7 +10,7 @@ app.UseStaticFiles();
 
 app.MapGet("/client-config", (IConfiguration configuration) =>
 {
-    var apiBaseUrl = configuration["FrontendClient:ApiBaseUrl"] ?? "https://localhost:7040/api/v1";
+    var apiBaseUrl = configuration["FrontendClient:ApiBaseUrl"] ?? "https://localhost:8081";
     return Results.Ok(new ClientConfigResponse(apiBaseUrl));
 });
 

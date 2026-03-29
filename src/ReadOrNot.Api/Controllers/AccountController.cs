@@ -9,7 +9,7 @@ namespace ReadOrNot.Api.Controllers;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/account")]
+[Route("account")]
 public sealed class AccountController(IAccountService accountService) : ControllerBase
 {
     [HttpGet]

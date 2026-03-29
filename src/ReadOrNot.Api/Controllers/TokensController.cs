@@ -9,7 +9,7 @@ namespace ReadOrNot.Api.Controllers;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/tokens")]
+[Route("tokens")]
 public sealed class TokensController(ITokenService tokenService) : ControllerBase
 {
     [HttpGet]

@@ -6,7 +6,7 @@ using ReadOrNot.Application.Interfaces;
 namespace ReadOrNot.Api.Controllers;
 
 [ApiController]
-[Route("api/v1/auth")]
+[Route("auth")]
 [EnableRateLimiting("auth")]
 public sealed class AuthController(IAuthService authService) : ControllerBase
 {

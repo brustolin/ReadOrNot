@@ -9,7 +9,7 @@ namespace ReadOrNot.Api.Controllers;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/reports")]
+[Route("reports")]
 public sealed class ReportsController(ITokenService tokenService) : ControllerBase
 {
     [HttpGet("tokens/{tokenId:int}")]

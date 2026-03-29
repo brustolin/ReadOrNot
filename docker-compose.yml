@@ -7,10 +7,16 @@ services:
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Server=${DATABASE_HOST};Port=3306;Database=${DATABASE_NAME};User=root;Password=${DATABASE_PASSWORD};
-      - JwtSettings__SecretKey=${JWT_SECRET_KEY:-YourSuperSecretKeyForJWTTokenGeneration123456789}
+      - Database__Provider=MySql
+      - Database__ConnectionStringName=MySql
+      - Database__MySqlServerVersion=${DATABASE_MYSQL_SERVER_VERSION:-8.0.36}
+      - ConnectionStrings__MySql=Server=${DATABASE_HOST};Port=3306;Database=${DATABASE_NAME};User=root;Password=${DATABASE_PASSWORD};
+      - Jwt__SigningKey=${JWT_SECRET_KEY:-YourSuperSecretKeyForJWTTokenGeneration123456789}
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+      - Cors__AllowedOrigins__0=${CORS_ALLOWED_ORIGINS:-http://localhost:8081}
+      - Frontend__BaseUrl=${FRONTEND_URL:-http://localhost:8081}
+      - Tracking__PublicBaseUrl=${TRACKING_PUBLIC_BASE_URL:-http://localhost:8081}
     networks:
       - ekklesia-shared-network
 
@@ -24,6 +30,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+      - FrontendClient__ApiBaseUrl=${API_BASE_URL:-http://localhost:8081}
     networks:
       - ekklesia-shared-network
 
