@@ -1,0 +1,30 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ../../*.slnx ./
+COPY ../../src/ReadOrNot.Api/ReadOrNot.Api.csproj ./src/ReadOrNot.Api/
+COPY ../../src/ReadOrNot.Application/ReadOrNot.Application.csproj ./src/ReadOrNot.Application/
+COPY ../../src/ReadOrNot.Domain/ReadOrNot.Domain.csproj ./src/ReadOrNot.Domain/
+COPY ../../src/ReadOrNot.Infrastructure/ReadOrNot.Infrastructure.csproj ./src/ReadOrNot.Infrastructure/
+COPY ../../src/ReadOrNot.Migrations.SqlServer/ReadOrNot.Migrations.SqlServer.csproj ./src/ReadOrNot.Migrations.SqlServer/
+COPY ../../src/ReadOrNot.Migrations.MySql/ReadOrNot.Migrations.MySql.csproj ./src/ReadOrNot.Migrations.MySql/
+COPY ../../src/ReadOrNot.Web/ReadOrNot.Web.csproj ./src/ReadOrNot.Web/
+COPY ../../tests/ReadOrNot.Api.IntegrationTests/ReadOrNot.Api.IntegrationTests.csproj ./tests/ReadOrNot.Api.IntegrationTests/
+COPY ../../tests/ReadOrNot.Domain.Tests/ReadOrNot.Domain.Tests.csproj ./tests/ReadOrNot.Domain.Tests/
+COPY ../../*.props ./
+
+RUN dotnet restore 
+
+COPY ../../ .
+
+FROM build AS publish
+RUN dotnet publish "./src/ReadOrNot.Api/ReadOrNot.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+EXPOSE 8080
+
+COPY --from=publish /app/publish .
+
+ENTRYPOINT ["dotnet", "ReadOrNot.Api.dll"]

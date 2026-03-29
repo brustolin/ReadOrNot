@@ -1,0 +1,33 @@
+services:
+  ron_api:
+    build:
+      context: .
+      dockerfile: ./infra/api/Dockerfile
+    container_name: readornot_api
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=${DATABASE_HOST};Port=3306;Database=${DATABASE_NAME};User=root;Password=${DATABASE_PASSWORD};
+      - JwtSettings__SecretKey=${JWT_SECRET_KEY:-YourSuperSecretKeyForJWTTokenGeneration123456789}
+      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+    networks:
+      - ekklesia-shared-network
+
+  ron_frontend:
+    build:
+      context: .
+      dockerfile: ./infra/web/Dockerfile
+    container_name: readornot_frontend
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
+    networks:
+      - ekklesia-shared-network
+
+networks:
+  ekklesia-shared-network:
+    external: true
+    name: ekklesia-shared-network
