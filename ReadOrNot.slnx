@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ReadOrNot.Api/ReadOrNot.Api.csproj" />
+    <Project Path="src/ReadOrNot.Application/ReadOrNot.Application.csproj" />
+    <Project Path="src/ReadOrNot.Domain/ReadOrNot.Domain.csproj" />
+    <Project Path="src/ReadOrNot.Infrastructure/ReadOrNot.Infrastructure.csproj" />
+    <Project Path="src/ReadOrNot.Migrations.MySql/ReadOrNot.Migrations.MySql.csproj" />
+    <Project Path="src/ReadOrNot.Migrations.SqlServer/ReadOrNot.Migrations.SqlServer.csproj" />
+    <Project Path="src/ReadOrNot.Web/ReadOrNot.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ReadOrNot.Api.IntegrationTests/ReadOrNot.Api.IntegrationTests.csproj" />
+    <Project Path="tests/ReadOrNot.Domain.Tests/ReadOrNot.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
