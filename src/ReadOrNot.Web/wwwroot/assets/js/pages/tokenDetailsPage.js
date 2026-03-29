@@ -38,7 +38,7 @@ export async function renderTokenDetailsPage(app, context, route) {
       <section class="panel stack">
         <h2>Embed this URL</h2>
         <div class="code-box">${token.trackingImageUrl}</div>
-        <div class="code-box">${token.suggestedImgTag}</div>
+        <div class="code-box"><textarea readonly>${token.suggestedImgTag}</textarea></div>
       </section>
 
       <section class="stats-grid">
